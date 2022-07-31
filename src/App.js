@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import LeftComponent from "./InfoComponent/LeftComponent";
+import { useState } from "react";
+import "./App.css";
+import RightComponent from "./InfoComponent/RightComponent";
 
-function App() {
+const App = () => {
+  const [getInfo, setInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    Message: "",
+  });
+  const getAllInformation = (data) => {
+    setInfo({
+      ...getInfo,
+      firstName: data.target.field1.value,
+      lastName: data.target.field2.value,
+      email: data.target.field3.value,
+      subject: data.target.field4.value,
+      Message: data.target.field5.value,
+    });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="maindiv">
+      <div>
+        <LeftComponent passTheInformation={getAllInformation}></LeftComponent>
+      </div>
+      <div>
+        <RightComponent send={getInfo}></RightComponent>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
